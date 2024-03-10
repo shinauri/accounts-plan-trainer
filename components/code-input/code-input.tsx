@@ -65,7 +65,7 @@ export default function CodeInput({
           შეამოწმე
         </Button>
         <Button onClick={handleNext} color="warning" size={"lg"}>
-          შემდეგი
+          არ ვიცი
         </Button>
       </div>
     </div>
