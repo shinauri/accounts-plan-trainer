@@ -5,6 +5,7 @@ import { TTest } from "@/types/TTest";
 import {
   Accordion,
   AccordionItem,
+  Card,
   Chip,
   Listbox,
   ListboxItem,
@@ -53,32 +54,37 @@ export default function ExamResults({
   };
 
   return (
-    <Accordion
-      variant="shadow"
-      className="max-h-[350px] overflow-y-auto overflow-x-auto"
-    >
+    <Accordion variant="shadow">
       <AccordionItem aria-label="results" title="შედეგები">
-        <Listbox aria-label="accounts" onAction={(key) => alert(key)}>
-          {Array.from(examItems.entries()).map(([key, item]) => {
-            return (
-              <ListboxItem key={item.code} textValue={item.text}>
-                <Tooltip
-                  content={`${item.code} : ${item.text}`}
-                  color="primary"
-                  placement="top-start"
-                >
-                  <div>
-                    <Chip isDisabled color={getChipColor(item.correctAnswers)}>
-                      {item.correctAnswers}
-                    </Chip>
-                    &nbsp;
-                    <span>{item.text}</span>
-                  </div>
-                </Tooltip>
-              </ListboxItem>
-            );
-          })}
-        </Listbox>
+        <Card
+          shadow="none"
+          className="w-full max-h-[270px] overflow-y-auto overflow-x-auto"
+        >
+          <Listbox aria-label="accounts" onAction={(key) => alert(key)}>
+            {Array.from(examItems.entries()).map(([key, item]) => {
+              return (
+                <ListboxItem key={item.code} textValue={item.text}>
+                  <Tooltip
+                    content={`${item.code} : ${item.text}`}
+                    color="primary"
+                    placement="top-start"
+                  >
+                    <div>
+                      <Chip
+                        isDisabled
+                        color={getChipColor(item.correctAnswers)}
+                      >
+                        {item.correctAnswers}
+                      </Chip>
+                      &nbsp;
+                      <span>{item.text}</span>
+                    </div>
+                  </Tooltip>
+                </ListboxItem>
+              );
+            })}
+          </Listbox>
+        </Card>
       </AccordionItem>
     </Accordion>
   );
