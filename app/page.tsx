@@ -17,3 +17,19 @@ export default function Home() {
     </main>
   );
 }
+
+{
+  /* 
+  import { Tab, Tabs } from "@nextui-org/react";
+  <Tabs aria-label="Options">
+          <Tab key="accounts-exam-trainer" title="ანგარიშთა გეგმის ტრენაჟორი">
+            
+          </Tab>
+          <Tab key="music" title="Music">
+            <div>hhhh</div>
+          </Tab>
+          <Tab key="videos" title="Videos">
+            <div>hhhh</div>
+          </Tab>
+        </Tabs> */
+}

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import NextUiProvider from "@/components/providers/next-ui/next-ui-provider";
+import AppNavbar from "@/components/navbar/navbar";
+import AppStoreProvider from "@/components/app-store-provider";
 
 const monserat = Montserrat({ subsets: ["latin"] });
 
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={monserat.className}>
-        <NextUiProvider>{children}</NextUiProvider>
+        <AppNavbar />
+        <NextUiProvider>
+          <AppStoreProvider>{children}</AppStoreProvider>
+        </NextUiProvider>
       </body>
     </html>
   );
