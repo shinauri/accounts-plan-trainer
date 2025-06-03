@@ -2,13 +2,14 @@
 
 "use client";
 
-import { Card, CardBody, Input } from "@nextui-org/react";
+import { Card, CardBody, Input, Switch } from "@nextui-org/react";
 import TAccount from "../t-account";
 import PercentInput from "../percent-input"; // Assuming this component exists and works
 import { useEffect, useState, useCallback } from "react"; // Added useCallback
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { StoreModel } from "@/store"; // Import StoreModel for typing
 import JournalEntryRow from "../journal/journal-entry-row";
+import HelpRequest from "../help-request";
 
 // Helper to get percentage as a decimal
 const getNumberPercent = (value: number): number => {
@@ -113,6 +114,10 @@ export default function SalaryTrainer() {
   const journal = useStoreState((state: StoreModel) => state.journal.items);
   const setJournal = useStoreActions(
     (actions: any) => actions.journal.setJournal // Cast to any for simplicity here, or type properly
+  );
+
+  const setIsHelpNeeded = useStoreActions(
+    (actions: any) => actions.app.showOriginalData.setShow // Cast to any for simplicity here, or type properly
   );
 
   const [wageInput, setWageInput] = useState<string>("");
@@ -394,6 +399,13 @@ export default function SalaryTrainer() {
             <div>საშემოსავლო: {getIncomeTaxText()}</div>
             <div>საპენსიო: {getPensionTaxText()}</div>
             <div>დარიცხული ხელფასი: {getNetWageText()}</div>
+            <div>
+              <HelpRequest
+                onChange={(val: boolean) => {
+                  setIsHelpNeeded({ show: val });
+                }}
+              />
+            </div>
           </div>
         </CardBody>
       </Card>

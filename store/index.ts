@@ -44,12 +44,35 @@ export interface JournalModel {
   >;
 }
 
+export interface ShowOriginalDataModel {
+  show: boolean;
+  setShow: Action<
+    ShowOriginalDataModel,
+    {
+      show: boolean;
+    }
+  >;
+}
+
+export interface App {
+  showOriginalData: ShowOriginalDataModel;
+}
+
 export interface StoreModel {
+  app: App;
   salary: SalaryModel;
   journal: JournalModel;
 }
 
 const store = createStore<StoreModel>({
+  app: {
+    showOriginalData: {
+      show: false,
+      setShow: action((state, payload) => {
+        state.show = payload.show;
+      }),
+    },
+  },
   salary: {
     accounts: [
       {

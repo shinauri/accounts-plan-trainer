@@ -2,8 +2,9 @@
 
 "use client";
 
-import { Account } from "@/store";
+import { Account, StoreModel } from "@/store";
 import { Input, Tooltip } from "@nextui-org/react";
+import { useStoreState } from "easy-peasy";
 // Import useMemo from React
 import React, { useEffect, useState, useMemo } from "react";
 
@@ -191,6 +192,10 @@ export function EditableDiv({
     onInputChange(event.target.value);
   };
 
+  const isHelpNeeded = useStoreState(
+    (state: StoreModel) => state.app.showOriginalData.show
+  );
+
   const handleClear = () => {
     onInputChange("");
   };
@@ -247,11 +252,13 @@ export function EditableDiv({
         isClearable={currentInputValue !== ""}
         color={inputColor}
         size={"sm"}
-        // placeholder={
-        //   originalValueInCell !== null && isFinite(originalValueInCell)
-        //     ? originalValueInCell.toFixed(2)
-        //     : ""
-        // }
+        placeholder={
+          isHelpNeeded &&
+          originalValueInCell !== null &&
+          isFinite(originalValueInCell)
+            ? originalValueInCell.toFixed(2)
+            : ""
+        }
         variant="flat"
         radius="none"
         type="text"

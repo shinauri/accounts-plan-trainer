@@ -3,7 +3,8 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { Input, Tooltip } from "@nextui-org/react";
 import BraceSvg from "../brace-svg"; // Adjust path if needed
-import { Journal } from "@/store";
+import { Journal, StoreModel } from "@/store";
+import { useStoreState } from "easy-peasy";
 
 interface JournalEntryRowProps {
   entry: Journal;
@@ -14,6 +15,10 @@ const JournalEntryRow: React.FC<JournalEntryRowProps> = ({ entry, index }) => {
   const [userInput, setUserInput] = useState<string>("");
   const [status, setStatus] = useState<"default" | "success" | "danger">(
     "default"
+  );
+
+  const isHelpNeeded = useStoreState(
+    (state: StoreModel) => state.app.showOriginalData.show
   );
 
   useEffect(() => {
@@ -93,7 +98,9 @@ const JournalEntryRow: React.FC<JournalEntryRowProps> = ({ entry, index }) => {
         //aria-label={`Amount for entry ${1}`}
         type="number"
         inputMode="decimal"
-        placeholder=""
+        placeholder={
+          isHelpNeeded && entry.value !== null ? entry.value.toString() : ""
+        }
         value={userInput}
         onChange={handleInputChange}
         onClear={userInput ? handleClear : undefined}
