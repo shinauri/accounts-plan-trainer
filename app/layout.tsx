@@ -4,6 +4,7 @@ import "./globals.css";
 import NextUiProvider from "@/components/providers/next-ui/next-ui-provider";
 import AppNavbar from "@/components/navbar/navbar";
 import AppStoreProvider from "@/components/app-store-provider";
+import { Analytics } from "@vercel/analytics/next";
 
 const monserat = Montserrat({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <NextUiProvider>
           <AppStoreProvider>{children}</AppStoreProvider>
         </NextUiProvider>
+        <Analytics />
       </body>
     </html>
   );
